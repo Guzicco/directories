@@ -4,17 +4,19 @@ import "./App.css";
 import { API_LINK } from "./Globals";
 import styled from "styled-components";
 import LoaderSpinner from "./Components/Loaders/LoaderSpinner";
+import Folder from "./Components/Folder";
+import File from "./Components/File";
+
+export interface IDir {
+  name: string;
+  id: string;
+  files?: { name: string }[];
+  directories?: IDir[];
+}
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentDir, setCurrentDir] = useState<IDir | undefined>(undefined);
-
-  interface IDir {
-    name: string;
-    id: string;
-    files?: [{ name: string }];
-    directories?: IDir[];
-  }
 
   const fetchDirData = async (id = "") => {
     setLoading(true);
@@ -35,12 +37,14 @@ function App() {
 
   const Content = styled.main`
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin: 50px;
   `;
 
   const Navigation = styled.nav`
     position: sticky;
+    padding: 30px;
     height: 100px;
     background-color: rgb(30, 30, 30);
   `;
@@ -48,12 +52,14 @@ function App() {
   return (
     <div className="App">
       <Navigation>
-        <h2>Path:</h2>
         <nav>{currentDir?.name}</nav>
       </Navigation>
       <Content>
         {currentDir?.directories?.map((dir) => (
-          <p>{dir.name}</p>
+          <Folder name={dir.name} id={dir.id} key={dir.id} />
+        ))}
+        {currentDir?.files?.map((file) => (
+          <File name={file.name} key={file.name} />
         ))}
       </Content>
       {loading && <LoaderSpinner />}
