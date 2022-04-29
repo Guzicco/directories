@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { API_LINK } from "./Globals";
 import styled from "styled-components";
+import LoaderSpinner from "./Components/Loaders/LoaderSpinner";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,19 +33,30 @@ function App() {
     fetchDirData();
   }, []);
 
-  const Content = styled.div`
+  const Content = styled.main`
     display: flex;
     align-items: center;
     justify-content: center;
   `;
 
+  const Navigation = styled.nav`
+    position: sticky;
+    height: 100px;
+    background-color: rgb(30, 30, 30);
+  `;
+
   return (
     <div className="App">
+      <Navigation>
+        <h2>Path:</h2>
+        <nav>{currentDir?.name}</nav>
+      </Navigation>
       <Content>
         {currentDir?.directories?.map((dir) => (
           <p>{dir.name}</p>
         ))}
       </Content>
+      {loading && <LoaderSpinner />}
     </div>
   );
 }
