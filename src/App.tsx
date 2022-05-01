@@ -2,24 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { API_LINK } from "./Globals";
-import styled from "styled-components";
 import LoaderSpinner from "./Components/Loaders/LoaderSpinner";
 import Folder from "./Components/Folder";
 import File from "./Components/File";
-
-const Content = styled.main`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  margin: 50px;
-`;
-
-const Navigation = styled.nav`
-  position: sticky;
-  padding: 30px;
-  height: 100px;
-  background-color: rgb(30, 30, 30);
-`;
+import NavigationStyles from "./Components/Styles/NagivationStyles";
+import ContentStyles from "./Components/Styles/ContentStyles";
 
 export interface IPath {
   name: string;
@@ -73,7 +60,7 @@ function App() {
   return (
     <div className="App">
       {loading && <LoaderSpinner />}
-      <Navigation>
+      <NavigationStyles>
         {directoryPath.map((path, index) => (
           <button
             onClick={() => {
@@ -83,8 +70,8 @@ function App() {
             {path.name}/
           </button>
         ))}
-      </Navigation>
-      <Content>
+      </NavigationStyles>
+      <ContentStyles>
         {directoryData.directories?.map((dir) => (
           <Folder
             name={dir.name}
@@ -96,7 +83,7 @@ function App() {
         {directoryData.files?.map((file) => (
           <File name={file.name} key={file.name} />
         ))}
-      </Content>
+      </ContentStyles>
     </div>
   );
 }
