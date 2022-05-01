@@ -1,9 +1,13 @@
 import { IDir } from "../App";
 import FolderEntity from "./Styles/FolderEntity";
 
-const Folder: React.FC<IDir> = ({ name }) => {
+interface IProps extends IDir {
+  onClick: (id: string) => void;
+}
+
+const Folder: React.FC<IProps> = ({ name, id, onClick }) => {
   return (
-    <FolderEntity>
+    <FolderEntity onClick={() => onClick(id)}>
       <img src={require("../assets/icons/FolderIcon.png")} alt="Folder" />
       <p>{name}</p>
     </FolderEntity>

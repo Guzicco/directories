@@ -7,6 +7,20 @@ import LoaderSpinner from "./Components/Loaders/LoaderSpinner";
 import Folder from "./Components/Folder";
 import File from "./Components/File";
 
+const Content = styled.main`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin: 50px;
+`;
+
+const Navigation = styled.nav`
+  position: sticky;
+  padding: 30px;
+  height: 100px;
+  background-color: rgb(30, 30, 30);
+`;
+
 export interface IDir {
   name: string;
   id: string;
@@ -35,19 +49,9 @@ function App() {
     fetchDirData();
   }, []);
 
-  const Content = styled.main`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    margin: 50px;
-  `;
-
-  const Navigation = styled.nav`
-    position: sticky;
-    padding: 30px;
-    height: 100px;
-    background-color: rgb(30, 30, 30);
-  `;
+  const handleFolderClick: (id: string) => void = (id) => {
+    fetchDirData(id);
+  };
 
   return (
     <div className="App">
@@ -56,7 +60,12 @@ function App() {
       </Navigation>
       <Content>
         {currentDir?.directories?.map((dir) => (
-          <Folder name={dir.name} id={dir.id} key={dir.id} />
+          <Folder
+            name={dir.name}
+            id={dir.id}
+            key={dir.id}
+            onClick={handleFolderClick}
+          />
         ))}
         {currentDir?.files?.map((file) => (
           <File name={file.name} key={file.name} />
