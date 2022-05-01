@@ -7,6 +7,7 @@ import Folder from "./Components/Folder";
 import File from "./Components/File";
 import NavigationStyles from "./Components/Styles/NagivationStyles";
 import ContentStyles from "./Components/Styles/ContentStyles";
+import LinkStyles from "./Components/Styles/LinkStyles";
 
 export interface IPath {
   name: string;
@@ -62,13 +63,15 @@ function App() {
       {loading && <LoaderSpinner />}
       <NavigationStyles>
         {directoryPath.map((path, index) => (
-          <button
+          <LinkStyles
+            href="#"
             onClick={() => {
               handleNavigationClick(index);
             }}
           >
-            {path.name}/
-          </button>
+            {path.name}
+            {index !== directoryPath.length - 1 && <span>/</span>}
+          </LinkStyles>
         ))}
       </NavigationStyles>
       <ContentStyles>
