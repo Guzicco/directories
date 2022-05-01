@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const FolderEntity = styled.div`
+const FolderEntityStyles = styled.div`
   width: 100px;
   padding: 20px;
   border: solid 1px red;
   cursor: pointer;
 `;
 
-export default FolderEntity;
+export default FolderEntityStyles;

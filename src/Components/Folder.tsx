@@ -1,5 +1,5 @@
 import { IPath, IDir } from "../App";
-import FolderEntity from "./Styles/FolderEntity";
+import FolderEntityStyles from "./Styles/FolderEntityStyles";
 
 interface IProps extends IDir {
   onClick: (path: IPath) => void;
@@ -7,10 +7,10 @@ interface IProps extends IDir {
 
 const Folder: React.FC<IProps> = ({ name, id, onClick }) => {
   return (
-    <FolderEntity onClick={() => onClick({ name, id })}>
+    <FolderEntityStyles onClick={() => onClick({ name, id })}>
       <img src={require("../assets/icons/FolderIcon.png")} alt="Folder" />
       <p>{name}</p>
-    </FolderEntity>
+    </FolderEntityStyles>
   );
 };
 
