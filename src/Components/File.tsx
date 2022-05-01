@@ -1,4 +1,4 @@
-import FolderEntity from "./Styles/FolderEntity";
+import FolderEntityStyles from "./Styles/FolderEntityStyles";
 
 interface IProps {
   name: string;
@@ -6,10 +6,14 @@ interface IProps {
 
 const File: React.FC<IProps> = ({ name }) => {
   return (
-    <FolderEntity>
-      <img src={require("../assets/icons/FileIcon.png")} alt="File" />
-      <p>{name.length >= 8 ? `${name.slice(0, 7)}..` : name}</p>
-    </FolderEntity>
+    <FolderEntityStyles>
+      {name.endsWith("jpg") ? (
+        <img src={require("../assets/icons/ImgIcon.png")} alt="jpg" />
+      ) : (
+        <img src={require("../assets/icons/FileIcon.png")} alt="file" />
+      )}
+      <p>{name.split(".")[0].length >= 8 ? `${name.slice(0, 7)}...` : name}</p>
+    </FolderEntityStyles>
   );
 };
 
