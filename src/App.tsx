@@ -21,45 +21,71 @@ const Navigation = styled.nav`
   background-color: rgb(30, 30, 30);
 `;
 
-export interface IDir {
+export interface IPath {
   name: string;
   id: string;
+}
+
+export interface IDir extends IPath {
   files?: { name: string }[];
   directories?: IDir[];
 }
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [currentDir, setCurrentDir] = useState<IDir | undefined>(undefined);
+  const [directoryData, setDirectoryData] = useState<IDir>({
+    name: "",
+    id: "",
+  });
+  const [directoryPath, setDirectoryPath] = useState<IPath[]>([]);
 
+  useEffect(() => {
+    fetchDirData();
+  }, []);
+
+  // FUNCTIONS
   const fetchDirData = async (id = "") => {
     setLoading(true);
     try {
       const dirData = await axios
-        .get(API_LINK + id)
+        .get<IDir>(API_LINK + id)
         .then((response) => response.data);
-      setCurrentDir(dirData);
+      setDirectoryData(dirData);
+      if (directoryPath.length === 0) {
+        setDirectoryPath([{ name: dirData.name, id }]);
+      }
     } catch (err) {
       console.error(err);
     }
     setLoading(false);
   };
 
-  useEffect(() => {
-    fetchDirData();
-  }, []);
-
-  const handleFolderClick: (id: string) => void = (id) => {
+  // HANDLERS
+  const handleFolderClick: (path: IPath) => void = ({ name, id }) => {
+    setDirectoryPath([...directoryPath, { name, id }]);
     fetchDirData(id);
+  };
+  const handleNavigationClick: any = (pathIndex: number) => {
+    fetchDirData(directoryPath[pathIndex].id);
+    setDirectoryPath(directoryPath.slice(0, pathIndex + 1));
   };
 
   return (
     <div className="App">
+      {loading && <LoaderSpinner />}
       <Navigation>
-        <nav>{currentDir?.name}</nav>
+        {directoryPath.map((path, index) => (
+          <button
+            onClick={() => {
+              handleNavigationClick(index);
+            }}
+          >
+            {path.name}/
+          </button>
+        ))}
       </Navigation>
       <Content>
-        {currentDir?.directories?.map((dir) => (
+        {directoryData.directories?.map((dir) => (
           <Folder
             name={dir.name}
             id={dir.id}
@@ -67,11 +93,10 @@ function App() {
             onClick={handleFolderClick}
           />
         ))}
-        {currentDir?.files?.map((file) => (
+        {directoryData.files?.map((file) => (
           <File name={file.name} key={file.name} />
         ))}
       </Content>
-      {loading && <LoaderSpinner />}
     </div>
   );
 }
