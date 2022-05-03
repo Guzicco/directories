@@ -1,4 +1,5 @@
 import FolderEntity from "../../StyledComponents/FolderEntity";
+import truncateString from "../../Utils/truncateString";
 const FileIcon = require("./File.png");
 const ImgIcon = require("./Img.png");
 
@@ -14,7 +15,7 @@ const File: React.FC<IProps> = ({ name }) => {
       ) : (
         <img src={FileIcon} alt="file" />
       )}
-      <p>{name.split(".")[0].length >= 8 ? `${name.slice(0, 7)}...` : name}</p>
+      <p>{truncateString(name)}</p>
     </FolderEntity>
   );
 };
