@@ -4,6 +4,6 @@ export interface IPath {
 }
 
 export interface IDir extends IPath {
-  files?: { name: string }[];
-  directories?: IDir[];
+  files: { name: string }[];
+  directories: IDir[];
 }

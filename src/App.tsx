@@ -13,6 +13,8 @@ function App() {
   const [directoryData, setDirectoryData] = useState<IDir>({
     name: "",
     id: "",
+    directories: [],
+    files: [],
   });
   const [directoryPath, setDirectoryPath] = useState<IPath[]>([]);
 
@@ -56,7 +58,7 @@ function App() {
         onClick={handleNavigationClick}
       />
       <Content>
-        {directoryData.directories?.map((dir) => (
+        {directoryData.directories.map((dir) => (
           <Folder
             name={dir.name}
             id={dir.id}
@@ -64,7 +66,7 @@ function App() {
             onClick={handleFolderClick}
           />
         ))}
-        {directoryData.files?.map((file) => (
+        {directoryData.files.map((file) => (
           <File name={file.name} key={file.name} />
         ))}
       </Content>
