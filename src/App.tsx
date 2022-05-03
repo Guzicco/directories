@@ -1,23 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import { API_LINK } from "./Globals";
-import LoaderSpinner from "./Components/Loaders/LoaderSpinner";
-import Folder from "./Components/Folder";
-import File from "./Components/File";
-import NavigationStyles from "./Components/Styles/NagivationStyles";
-import ContentStyles from "./Components/Styles/ContentStyles";
-import LinkStyles from "./Components/Styles/LinkStyles";
-
-export interface IPath {
-  name: string;
-  id: string;
-}
-
-export interface IDir extends IPath {
-  files?: { name: string }[];
-  directories?: IDir[];
-}
+import LoaderSpinner from "./Components/LoaderSpinner";
+import File from "./Components/File/File";
+import { IDir, IPath } from "./types";
+import Folder from "./Components/Folder/Folder";
+import Navigation from "./StyledComponents/Navigation";
+import Link from "./StyledComponents/Link";
+import Content from "./StyledComponents/Content";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -61,9 +51,9 @@ function App() {
   return (
     <div className="App">
       {loading && <LoaderSpinner />}
-      <NavigationStyles>
+      <Navigation>
         {directoryPath.map((path, index) => (
-          <LinkStyles
+          <Link
             href="#"
             onClick={() => {
               handleNavigationClick(index);
@@ -71,10 +61,10 @@ function App() {
           >
             {path.name}
             {index !== directoryPath.length - 1 && <span>/</span>}
-          </LinkStyles>
+          </Link>
         ))}
-      </NavigationStyles>
-      <ContentStyles>
+      </Navigation>
+      <Content>
         {directoryData.directories?.map((dir) => (
           <Folder
             name={dir.name}
@@ -86,7 +76,7 @@ function App() {
         {directoryData.files?.map((file) => (
           <File name={file.name} key={file.name} />
         ))}
-      </ContentStyles>
+      </Content>
     </div>
   );
 }
