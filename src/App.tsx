@@ -19,12 +19,12 @@ function App() {
   const [directoryPath, setDirectoryPath] = useState<IPath[]>([]);
 
   useEffect(() => {
-    fetchDirData();
+    fetchDirectoryData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // FUNCTIONS
-  const fetchDirData = async (id = "") => {
+  const fetchDirectoryData = async (id = "") => {
     setLoading(true);
     try {
       const dirData = await axios
@@ -41,13 +41,13 @@ function App() {
   };
 
   // HANDLERS
-  const handleFolderClick: (path: IPath) => void = ({ name, id }) => {
-    setDirectoryPath([...directoryPath, { name, id }]);
-    fetchDirData(id);
+  const handleFolderClick: (path: IPath) => void = (path) => {
+    setDirectoryPath([...directoryPath, path]);
+    fetchDirectoryData(path.id);
   };
-  const handleNavigationClick: any = (pathIndex: number) => {
-    fetchDirData(directoryPath[pathIndex].id);
+  const handleNavigationClick: (pathIndex: number) => void = (pathIndex) => {
     setDirectoryPath(directoryPath.slice(0, pathIndex + 1));
+    fetchDirectoryData(directoryPath[pathIndex].id);
   };
 
   return (
