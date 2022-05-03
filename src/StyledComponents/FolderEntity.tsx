@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const FolderEntityStyles = styled.div`
+const FolderEntity = styled.div`
   width: 100px;
   padding: 20px;
   cursor: pointer;
@@ -12,4 +12,4 @@ const FolderEntityStyles = styled.div`
   }
 `;
 
-export default FolderEntityStyles;
+export default FolderEntity;

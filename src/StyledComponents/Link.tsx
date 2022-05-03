@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LinkStyles = styled.a`
+const Link = styled.a`
   color: white;
   text-decoration: none;
   padding-inline: 5px;
@@ -27,4 +27,4 @@ const LinkStyles = styled.a`
   }
 `;
 
-export default LinkStyles;
+export default Link;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const NavigationStyles = styled.nav`
+const Navigation = styled.nav`
   position: sticky;
   padding-block: 30px;
   padding-left: 50px;
@@ -8,4 +8,4 @@ const NavigationStyles = styled.nav`
   background-color: rgb(30, 30, 30);
 `;
 
-export default NavigationStyles;
+export default Navigation;
