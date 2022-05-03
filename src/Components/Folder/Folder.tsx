@@ -1,8 +1,8 @@
-import { IDir, IPath } from "../../types";
+import { IPath } from "../../types";
 import FolderEntity from "../../StyledComponents/FolderEntity";
 const FolderIcon = require("./Folder.png");
 
-interface IProps extends IDir {
+interface IProps extends IPath {
   onClick: (path: IPath) => void;
 }
 
