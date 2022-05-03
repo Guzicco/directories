@@ -41,11 +41,11 @@ function App() {
   };
 
   // HANDLERS
-  const handleFolderClick: (path: IPath) => void = (path) => {
+  const handleFolderClick = (path: IPath) => {
     setDirectoryPath([...directoryPath, path]);
     fetchDirectoryData(path.id);
   };
-  const handleNavigationClick: (pathIndex: number) => void = (pathIndex) => {
+  const handleNavigationClick = (pathIndex: number) => {
     setDirectoryPath(directoryPath.slice(0, pathIndex + 1));
     fetchDirectoryData(directoryPath[pathIndex].id);
   };
