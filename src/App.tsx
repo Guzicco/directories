@@ -5,9 +5,8 @@ import LoaderSpinner from "./Components/LoaderSpinner";
 import File from "./Components/File/File";
 import { IDir, IPath } from "./types";
 import Folder from "./Components/Folder/Folder";
-import Navigation from "./StyledComponents/Navigation";
-import Link from "./StyledComponents/Link";
 import Content from "./StyledComponents/Content";
+import Navigation from "./Components/Navigation";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -19,6 +18,7 @@ function App() {
 
   useEffect(() => {
     fetchDirData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // FUNCTIONS
@@ -51,19 +51,10 @@ function App() {
   return (
     <div className="App">
       {loading && <LoaderSpinner />}
-      <Navigation>
-        {directoryPath.map((path, index) => (
-          <Link
-            href="#"
-            onClick={() => {
-              handleNavigationClick(index);
-            }}
-          >
-            {path.name}
-            {index !== directoryPath.length - 1 && <span>/</span>}
-          </Link>
-        ))}
-      </Navigation>
+      <Navigation
+        directoryPath={directoryPath}
+        onClick={handleNavigationClick}
+      />
       <Content>
         {directoryData.directories?.map((dir) => (
           <Folder
