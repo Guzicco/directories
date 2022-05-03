@@ -5,7 +5,6 @@ const Navigation = styled.nav`
   padding-block: 30px;
   padding-left: 50px;
   height: 100px;
-  background-color: rgb(30, 30, 30);
 `;
 
 export default Navigation;

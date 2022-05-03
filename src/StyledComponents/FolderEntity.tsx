@@ -8,7 +8,7 @@ const FolderEntity = styled.div`
   transition: background-color 0.33s ease;
 
   :hover {
-    background-color: rgba(200, 200, 200, 0.5);
+    background-color: rgba(232, 234, 237, 0.04);
   }
 `;
 
