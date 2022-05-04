@@ -1,6 +1,30 @@
 import styled from "styled-components";
 import { IPath } from "../types";
 
+interface IProps {
+  directoryPath: IPath[];
+  onClick: (index: number) => void;
+}
+
+const Navigation: React.FC<IProps> = ({ directoryPath, onClick }) => {
+  return (
+    <NavigationStyle>
+      {directoryPath.map((path, index) => (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
+        <a
+          href="#"
+          onClick={() => {
+            onClick(index);
+          }}
+        >
+          {path.name}
+          {index !== directoryPath.length - 1 && <span>/</span>}
+        </a>
+      ))}
+    </NavigationStyle>
+  );
+};
+
 const NavigationStyle = styled.nav`
   position: sticky;
   padding-block: 30px;
@@ -34,29 +58,5 @@ const NavigationStyle = styled.nav`
     }
   }
 `;
-
-interface IProps {
-  directoryPath: IPath[];
-  onClick: (index: number) => void;
-}
-
-const Navigation: React.FC<IProps> = ({ directoryPath, onClick }) => {
-  return (
-    <NavigationStyle>
-      {directoryPath.map((path, index) => (
-        // eslint-disable-next-line jsx-a11y/anchor-is-valid
-        <a
-          href="#"
-          onClick={() => {
-            onClick(index);
-          }}
-        >
-          {path.name}
-          {index !== directoryPath.length - 1 && <span>/</span>}
-        </a>
-      ))}
-    </NavigationStyle>
-  );
-};
 
 export default Navigation;

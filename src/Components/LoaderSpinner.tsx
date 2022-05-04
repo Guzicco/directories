@@ -1,5 +1,25 @@
 import styled from "styled-components";
 
+const LoaderSpinner = () => {
+  return (
+    <Loader>
+      <Spinner>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </Spinner>
+    </Loader>
+  );
+};
 const Spinner = styled.div`
   display: inline-block;
   position: relative;
@@ -85,26 +105,5 @@ const Loader = styled.div`
   top: 0;
   background-color: rgba(100, 100, 100, 0.7);
 `;
-
-const LoaderSpinner = () => {
-  return (
-    <Loader>
-      <Spinner>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </Spinner>
-    </Loader>
-  );
-};
 
 export default LoaderSpinner;
